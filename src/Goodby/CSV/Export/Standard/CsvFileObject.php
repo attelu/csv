@@ -42,13 +42,14 @@ class CsvFileObject extends SplFileObject
     /**
      * Write a field array as a CSV line
      * @param array   $fields
-     * @param string  $delimiter
+     * @param string  $separator
      * @param string  $enclosure
-     * @param useless  $escape  THIS PARAM IS UNSED, BUT REQUIRED EXISTS, see https://bugs.php.net/bug.php?id=68479 and https://github.com/goodby/csv/issues/56
-     * @return int|void
+     * @param string  $escape
+     * @param string  $eol
+     * @return int|false
      */
     #[\ReturnTypeWillChange]
-    public function fputcsv($fields, $delimiter = null, $enclosure = null, $escape = null)
+    public function fputcsv(array $fields, string $separator = ",", string $enclosure = "\"", string $escape = "\\", string $eol = "\n"): int|false
     {
         // Temporary output a line to memory to get line as string
         $fp = fopen('php://temp', 'w+');
